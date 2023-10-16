@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public PaintingState paintingState;
     public bool CanView = false;
     public bool IsViewing = false;
+    public GameObject GetAbilityTxt;
+    //Ability bools
+    public bool HasLionAbility = false;
+    public bool LionAbilityActive = false;
 
     void Start()
     {
@@ -39,9 +43,9 @@ public class PlayerController : MonoBehaviour
             if (Hit.transform.gameObject.CompareTag("Animal"))
             {
                 CanView = true;
-                if (Input.GetKeyDown("space"))
+                if (Input.GetKeyDown("f"))
                 {
-                    //Activate ability code
+                    HasLionAbility = true;
                 }
 
                 if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -52,22 +56,33 @@ public class PlayerController : MonoBehaviour
                 if (IsViewing)
                 {
                     ViewPaintingTxt.SetActive(false);
+                    GetAbilityTxt.SetActive(false);
                 }
                 else
                 {
                     ViewPaintingTxt.SetActive(true);
+                    GetAbilityTxt.SetActive(true);
                 }
             }
         }
         else
         {
             ViewPaintingTxt.SetActive(false);
+            GetAbilityTxt.SetActive(false);
+        }
+
+        if (HasLionAbility && Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LionAbilityActive = true;
         }
 
         if (Input.GetKeyDown("space") && IsGrounded)
         {
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
-            //Rb.AddForce(transform.forward * JumpHeight, ForceMode.Impulse);
+            if (LionAbilityActive)
+            {
+                Rb.AddForce(transform.forward * 15, ForceMode.Impulse);
+            }
             IsGrounded = false;
         }
     }
