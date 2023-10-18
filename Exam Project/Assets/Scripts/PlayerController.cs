@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviour
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
             if (LionAbilityActive)
             {
-                Rb.AddForce(transform.forward * 15, ForceMode.Impulse);
+                Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
+                LionAbilityActive = false;
             }
             IsGrounded = false;
         }
