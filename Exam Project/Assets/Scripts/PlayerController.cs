@@ -15,12 +15,16 @@ public class PlayerController : MonoBehaviour
     public bool CanView = false;
     public bool IsViewing = false;
     public GameObject GetAbilityTxt;
+    public DialogueManager dialogueManager;
+    public GameObject DialogueAvailableTxt;
+    public bool CanViewDialogue = false;
     //Ability bools
     public bool HasLionAbility = false;
     public bool LionAbilityActive = false;
 
     void Start()
     {
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         Cursor.visible = false;
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();
         paintingState = GameObject.Find("Canvas").GetComponent<PaintingState>();
@@ -34,12 +38,22 @@ public class PlayerController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         Vector3 rotation = new Vector3(0.0f, mouseX * rotationSpeed, 0.0f);
         transform.Rotate(rotation);
-
+        DialogueAvailableTxt.SetActive(false);
 
         RaycastHit Hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
         {
+            if (Hit.transform.gameObject.CompareTag("NPC") && !CanViewDialogue)
+            {
+                DialogueAvailableTxt.SetActive(true);
+                if (Input.GetKeyDown("f"))
+                {
+                    Debug.Log("Testsdfd");
+                    DialogueAvailableTxt.SetActive(false);
+                    CanViewDialogue = true;
+                }
+            }
             if (Hit.transform.gameObject.CompareTag("Animal"))
             {
                 CanView = true;

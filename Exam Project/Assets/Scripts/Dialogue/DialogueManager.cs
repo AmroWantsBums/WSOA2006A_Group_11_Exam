@@ -8,7 +8,8 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    //public GameObject SentenceAvailableTxt;
+    public PlayerController playerController;
+    public bool DialogueTriggered = false;
 
     public Animator anim;
 
@@ -17,7 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        //SentenceAvailableTxt.SetActive(false);
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         sentences = new Queue<string>();
     }
 
@@ -41,7 +42,6 @@ public class DialogueManager : MonoBehaviour
     {
         if (sentences.Count == 0)
         {
-            //SentenceAvailableTxt.SetActive(false);
             EndDialogue();
             return;
         }
@@ -56,6 +56,8 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        playerController.CanViewDialogue = false;
+        DialogueTriggered = false;
         anim.SetBool("isOpen", false);
         Debug.Log("End of Conversation...");
     }
