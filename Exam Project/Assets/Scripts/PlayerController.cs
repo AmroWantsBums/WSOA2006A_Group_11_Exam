@@ -22,12 +22,19 @@ public class PlayerController : MonoBehaviour
     public bool HasLionAbility = false;
     public bool LionAbilityActive = false;
 
+    //Animation Code:
+    public StateMachineScript sms;
+
+
     void Start()
     {
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         Cursor.visible = false;
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();
         paintingState = GameObject.Find("Canvas").GetComponent<PaintingState>();
+
+        //Call State Machine Script
+        sms = GetComponent<StateMachineScript>();
     }
     void Update()
     {
@@ -39,6 +46,17 @@ public class PlayerController : MonoBehaviour
         Vector3 rotation = new Vector3(0.0f, mouseX * rotationSpeed, 0.0f);
         transform.Rotate(rotation);
         DialogueAvailableTxt.SetActive(false);
+
+        if(verticalInput == 0)
+        {
+            sms.walk = false;
+        }
+        else
+        {
+            //play walking animation
+            sms.walk = true;
+        }
+
 
         RaycastHit Hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
@@ -89,17 +107,23 @@ public class PlayerController : MonoBehaviour
         {
             LionAbilityActive = true;
         }
+        
 
         if (Input.GetKeyDown("space") && IsGrounded)
         {
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
+            //play jump animation
+            sms.jumpSuccess = true;
             if (LionAbilityActive)
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
                 LionAbilityActive = false;
             }
+            
             IsGrounded = false;
         }
+
+        
     }
 
     void OnCollisionEnter(Collision col)
