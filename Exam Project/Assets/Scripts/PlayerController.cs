@@ -111,9 +111,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown("space") && IsGrounded)
         {
+            Debug.Log("Jump");
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
             //play jump animation
-            sms.jumpSuccess = true;
+            //sms.jumpSuccess = true;
             if (LionAbilityActive)
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);

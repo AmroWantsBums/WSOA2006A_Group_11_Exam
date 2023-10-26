@@ -7,6 +7,7 @@ TagManager:
   - Animal
   - Ground
   - NPC
+  - Liftable
   layers:
   - Default
   - TransparentFX
