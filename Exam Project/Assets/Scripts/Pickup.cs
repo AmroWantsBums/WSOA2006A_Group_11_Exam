@@ -22,37 +22,49 @@ public class Pickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Holding)
+        {
+            ObjectToDrop.transform.forward = gameObject.transform.forward;
+            ObjectToDrop.transform.position = CarryPoint;
+        }
         PickupTxtObject.SetActive(false);
         CarryPoint = CarryPointObject.transform.position;
         RaycastHit Hit;
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
         {
-            PickupTxtObject.SetActive(true);
-            if (Hit.transform.gameObject.CompareTag("Liftable") && Input.GetKeyDown("f") && !Holding)
+            if (Hit.transform.gameObject.CompareTag("Liftable"))
             {
-                Holding = true;
-                PickupObject(Hit.transform.gameObject);
+                PickupTxtObject.SetActive(true);
+                if (Holding)
+                {
+                    PickupTxt.text = "Press 'G' to drop the object";
+                }
+                else
+                {
+                    PickupTxt.text = "Press 'F' to pick up the object";
+                }
+                if (Input.GetKey("f") && !Holding)
+                {                    
+                    PickupObject(Hit.transform.gameObject);
+                }
             }
-            if (Input.GetKeyDown("f") && Holding)
-            {
-                PickupTxt.text = "Press 'F' to drop the object";
-                DropObject(ObjectToDrop);
-            }
+        }
+
+        if (Input.GetKey("g") && Holding)
+        {
+            DropObject(ObjectToDrop);
         }
     }
 
     void PickupObject(GameObject PickedObject)
     {
-        PickedObject.transform.SetParent(gameObject.transform);
-        PickedObject.transform.forward = gameObject.transform.forward;
-        PickedObject.transform.position = CarryPoint;
+        Holding = true;
         ObjectToDrop = PickedObject;
     }
 
     void DropObject(GameObject PickedObject)
     {
-        PickedObject.transform.SetParent(null);
         Holding = false;
     }
 }
