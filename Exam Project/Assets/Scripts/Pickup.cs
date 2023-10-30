@@ -12,11 +12,12 @@ public class Pickup : MonoBehaviour
     public GameObject PickupTxtObject;
     public bool Holding = false;
     public GameObject ObjectToDrop;
+    public PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -28,31 +29,35 @@ public class Pickup : MonoBehaviour
             ObjectToDrop.transform.position = CarryPoint;
         }
         PickupTxtObject.SetActive(false);
-        CarryPoint = CarryPointObject.transform.position;
-        RaycastHit Hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
+        if (playerController.BuffaloAbilityActive)
         {
-            if (Hit.transform.gameObject.CompareTag("Liftable"))
+            CarryPoint = CarryPointObject.transform.position;
+            RaycastHit Hit;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
             {
-                PickupTxtObject.SetActive(true);
-                if (Holding)
+                if (Hit.transform.gameObject.CompareTag("Liftable"))
                 {
-                    PickupTxt.text = "Press 'G' to drop the object";
-                }
-                else
-                {
-                    PickupTxt.text = "Press 'F' to pick up the object";
-                }
-                if (Input.GetKey("f") && !Holding)
-                {                    
-                    PickupObject(Hit.transform.gameObject);
+                    PickupTxtObject.SetActive(true);
+                    if (Holding)
+                    {
+                        PickupTxt.text = "Press 'G' to drop the object";
+                    }
+                    else
+                    {
+                        PickupTxt.text = "Press 'F' to pick up the object";
+                    }
+                    if (Input.GetKey("f") && !Holding)
+                    {
+                        PickupObject(Hit.transform.gameObject);
+                    }
                 }
             }
-        }
+        }      
 
         if (Input.GetKey("g") && Holding)
         {
+            playerController.BuffaloAbilityActive = false;
             DropObject(ObjectToDrop);
         }
     }

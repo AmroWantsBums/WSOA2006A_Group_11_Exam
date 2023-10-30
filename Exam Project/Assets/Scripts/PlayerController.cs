@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     //Ability bools
     public bool HasLionAbility = false;
     public bool LionAbilityActive = false;
+    public bool HasBuffaloAbility = false;
+    public bool BuffaloAbilityActive = false;
 
     //Animation Code:
     public StateMachineScript sms;
@@ -62,15 +64,6 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(rotation);
         DialogueAvailableTxt.SetActive(false);
 
-        if(verticalInput == 0)
-        {
-            sms.walk = false;
-        }
-        else
-        {
-            //play walking animation
-            sms.walk = true;
-        }
 
 
         RaycastHit Hit;
@@ -90,11 +83,14 @@ public class PlayerController : MonoBehaviour
             if (Hit.transform.gameObject.CompareTag("Animal"))
             {
                 CanView = true;
-                if (Input.GetKeyDown("f"))
+                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LionWallPainting")
                 {
                     HasLionAbility = true;
                 }
-
+                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
+                {
+                    HasBuffaloAbility = true;
+                }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     IsViewing = true;
@@ -122,10 +118,23 @@ public class PlayerController : MonoBehaviour
         {
             LionAbilityActive = true;
         }
-        
+
+        if (HasBuffaloAbility && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            BuffaloAbilityActive = true;
+        }
 
 
-        
+
+        if (verticalInput == 0)
+        {
+            sms.walk = false;
+        }
+        else
+        {
+            //play walking animation
+            sms.walk = true;
+        }
     }
 
     void OnCollisionEnter(Collision col)
