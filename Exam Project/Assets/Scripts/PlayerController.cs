@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public bool LionAbilityActive = false;
     public bool HasBuffaloAbility = false;
     public bool BuffaloAbilityActive = false;
+    public bool HasRhinoAbility = false;
+    public bool RhinoAbilityActive = false;
 
     //Animation Code:
     public StateMachineScript sms;
@@ -91,6 +93,10 @@ public class PlayerController : MonoBehaviour
                 {
                     HasBuffaloAbility = true;
                 }
+                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "RhinoWallPainting")
+                {
+                    HasRhinoAbility = true;
+                }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     IsViewing = true;
@@ -122,6 +128,11 @@ public class PlayerController : MonoBehaviour
         if (HasBuffaloAbility && Input.GetKeyDown(KeyCode.Alpha2))
         {
             BuffaloAbilityActive = true;
+        }
+
+        if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            RhinoAbilityActive = true;
         }
 
 
