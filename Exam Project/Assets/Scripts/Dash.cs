@@ -35,8 +35,8 @@ public class Dash : MonoBehaviour
         {
             if (Input.GetKey("f"))
             {
-                PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
                 Dashing = true;
+                PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
             }
         }
     }
@@ -46,6 +46,7 @@ public class Dash : MonoBehaviour
         if (Dashing && collision.gameObject.CompareTag("Breakable"))
         {
             Destroy(collision.gameObject);
+            Dashing = false;
         }
     }
 }
