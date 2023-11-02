@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     //Animation Code:
     public StateMachineScript sms;
+    public UI uiscript;
 
 
     void Start()
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
                 LionAbilityActive = false;
+                uiscript.Reset();
             }
 
             IsGrounded = false;

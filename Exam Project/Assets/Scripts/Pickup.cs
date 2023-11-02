@@ -13,6 +13,7 @@ public class Pickup : MonoBehaviour
     public bool Holding = false;
     public GameObject ObjectToDrop;
     public PlayerController playerController;
+    public UI UiScript;
 
     // Start is called before the first frame update
     void Start()
@@ -71,5 +72,6 @@ public class Pickup : MonoBehaviour
     void DropObject(GameObject PickedObject)
     {
         Holding = false;
+        UiScript.Reset();
     }
 }
