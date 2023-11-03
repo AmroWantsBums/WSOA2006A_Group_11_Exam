@@ -9,6 +9,7 @@ TagManager:
   - NPC
   - Liftable
   - Breakable
+  - Climbable
   layers:
   - Default
   - TransparentFX
