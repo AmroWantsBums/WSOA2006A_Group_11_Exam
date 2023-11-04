@@ -61,6 +61,15 @@ public class PlayerController : MonoBehaviour
         }
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        if (Input.GetKey("left shift"))
+        {
+            Debug.Log("Sprinting");
+            moveSpeed = 12f;
+        }
+        else
+        {
+            moveSpeed = 8f;
+        }
         Vector3 movement = new Vector3(0.0f, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
         float mouseX = Input.GetAxis("Mouse X");
