@@ -727,8 +727,9 @@ GameObject:
   - component: {fileID: 905738827}
   - component: {fileID: 905738826}
   - component: {fileID: 905738825}
+  - component: {fileID: 905738828}
   m_Layer: 5
-  m_Name: Button (Legacy) (2)
+  m_Name: Play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,7 +799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 905738826}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 905738828}
+        m_TargetAssemblyTypeName: Scene, Assembly-CSharp
+        m_MethodName: StartScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &905738826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +850,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905738823}
   m_CullTransparentMesh: 1
+--- !u!114 &905738828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905738823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b005d46dce0104fae7d74493f8c63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &938803652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1391,7 @@ GameObject:
   - component: {fileID: 1542385550}
   - component: {fileID: 1542385549}
   m_Layer: 5
-  m_Name: Button (Legacy) (1)
+  m_Name: How to play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1436,7 +1461,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1542385550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2047536572}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1542385550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2173,7 +2210,7 @@ GameObject:
   - component: {fileID: 1837836496}
   - component: {fileID: 1837836495}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2243,7 +2280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1837836496}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 905738828}
+        m_TargetAssemblyTypeName: Scene, Assembly-CSharp
+        m_MethodName: CloseScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1837836496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2365,7 +2414,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1940746376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2047536572}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1940746376
 MonoBehaviour:
   m_ObjectHideFlags: 0
