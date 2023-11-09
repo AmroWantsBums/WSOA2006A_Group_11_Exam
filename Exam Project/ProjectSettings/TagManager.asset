@@ -10,6 +10,7 @@ TagManager:
   - Liftable
   - Breakable
   - Climbable
+  - Lever
   layers:
   - Default
   - TransparentFX
