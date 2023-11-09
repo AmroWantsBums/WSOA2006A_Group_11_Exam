@@ -21,24 +21,28 @@ public class Dash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BreakWallText.SetActive(false);
-        RaycastHit Hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
-        {            
-            if (Hit.transform.gameObject.CompareTag("Breakable"))
-            {
-                BreakWallText.SetActive(true);                  
-            }
-        }
         if (playerController.RhinoAbilityActive)
         {
-            if (Input.GetKey("f"))
+            BreakWallText.SetActive(false);
+            RaycastHit Hit;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
             {
-                Dashing = true;
-                PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
+                if (Hit.transform.gameObject.CompareTag("Breakable"))
+                {
+                    BreakWallText.SetActive(true);
+                }
             }
-        }
+            if (playerController.RhinoAbilityActive)
+            {
+                if (Input.GetKey("f"))
+                {
+                    Dashing = true;
+                    PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
+                    //playerController.RhinoAbilityActive = false;
+                }
+            }
+        }       
     }
 
     void OnCollisionEnter(Collision collision)

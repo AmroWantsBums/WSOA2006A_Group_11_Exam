@@ -24,7 +24,11 @@ public class PlayerController : MonoBehaviour
     public bool HasBuffaloAbility = false;
     public bool BuffaloAbilityActive = false;
     public bool HasRhinoAbility = false;
-    public bool RhinoAbilityActive = false;
+    public bool RhinoAbilityActive = false;   
+    public bool HasElephantAbility = false;
+    public bool ElephantAbilityActive = false;
+    public bool HasLeopardAbility = false;
+    public bool LeopardAbilityActive = false;
 
     //Animation Code:
     public StateMachineScript sms;
@@ -146,6 +150,15 @@ public class PlayerController : MonoBehaviour
             RhinoAbilityActive = true;
         }
 
+        if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            LeopardAbilityActive = true;
+        }
+
+        if (HasElephantAbility && Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            ElephantAbilityActive = true;
+        }
 
 
         if (verticalInput == 0)
