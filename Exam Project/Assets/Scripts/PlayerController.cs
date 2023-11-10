@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public DialogueManager dialogueManager;
     public GameObject DialogueAvailableTxt;
     public bool CanViewDialogue = false;
+    public GameObject AbilityGFX;
     //Ability bools
     public bool HasLionAbility = false;
     public bool LionAbilityActive = false;
@@ -35,13 +38,19 @@ public class PlayerController : MonoBehaviour
     public UI uiscript;
 
 
+    //Vide Code
+    public VideoPlayer RhinoVideo;
+    public GameObject RhinoVideoObject;
+    public RawImage RhinoImage;
+
+
     void Start()
     {
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         Cursor.visible = false;
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();
         paintingState = GameObject.Find("Canvas").GetComponent<PaintingState>();
-
+        RhinoVideo.loopPointReached += OnVideoEnd;
         //Call State Machine Script
         sms = GetComponent<StateMachineScript>();
     }
@@ -103,6 +112,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LionWallPainting")
                 {
                     HasLionAbility = true;
+                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
                 }
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
                 {
@@ -111,6 +121,8 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "RhinoWallPainting")
                 {
                     HasRhinoAbility = true;
+                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                    StartCoroutine(PlayRhinoVideo());
                 }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
@@ -178,5 +190,23 @@ public class PlayerController : MonoBehaviour
         {
             IsGrounded = true;
         }
+    }
+
+    IEnumerator PlayRhinoVideo()
+    {
+        yield return new WaitForSeconds(2f);
+        RhinoVideoObject.SetActive(true);
+        RhinoVideo.Play();
+        GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
+        foreach(GameObject f in GFXs)
+        {
+            Destroy(f);
+        }
+    }
+
+    void OnVideoEnd(VideoPlayer vp)
+    {
+        vp.enabled = false;
+        RhinoImage.enabled = false;
     }
 }

@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     public RawImage ActiveImage;
     public Texture LionTexture;
     public Texture BuffaloTexture;
+    public Texture RhinoTexture;
     public GameObject ActiveImageGameObject;
 
     // Start is called before the first frame update
@@ -50,15 +51,17 @@ public class UI : MonoBehaviour
             ActiveImage.texture = BuffaloTexture;
         }
 
-        /*if (playerController.LionAbilityActive)
+        if (playerController.RhinoAbilityActive)
         {
-            LionImage.material = ActiveMaterial;
+            LionImage.material = InactiveMaterial;
             BuffaloImage.material = InactiveMaterial;
             ElephantImage.material = InactiveMaterial;
             LeopardImage.material = InactiveMaterial;
-            RhinoImage.material = InactiveMaterial;
+            RhinoImage.material = ActiveMaterial;
+            ActiveImageGameObject.SetActive(true);
+            ActiveImage.texture = RhinoTexture;
         }
-
+        /*
         if (playerController.LionAbilityActive)
         {
             LionImage.material = ActiveMaterial;

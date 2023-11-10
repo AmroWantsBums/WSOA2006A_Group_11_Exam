@@ -11,6 +11,7 @@ TagManager:
   - Breakable
   - Climbable
   - Lever
+  - AbilityCircle
   layers:
   - Default
   - TransparentFX
