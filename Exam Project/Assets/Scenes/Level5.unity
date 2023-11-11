@@ -2116,8 +2116,8 @@ MonoBehaviour:
   BuffaloAbilityActive: 0
   HasRhinoAbility: 0
   RhinoAbilityActive: 0
-  HasElephantAbility: 1
-  ElephantAbilityActive: 1
+  HasElephantAbility: 0
+  ElephantAbilityActive: 0
   HasLeopardAbility: 0
   LeopardAbilityActive: 0
   sms: {fileID: 0}

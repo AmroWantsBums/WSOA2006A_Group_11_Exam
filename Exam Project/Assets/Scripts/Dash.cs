@@ -49,6 +49,7 @@ public class Dash : MonoBehaviour
         if (Dashing && collision.gameObject.CompareTag("Breakable"))
         {
             Destroy(collision.gameObject);
+            PlayerRb.AddForce(transform.forward * -DashSpeed, ForceMode.Impulse);
         }
     }
 

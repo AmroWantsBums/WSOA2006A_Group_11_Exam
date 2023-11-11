@@ -176,25 +176,45 @@ public class PlayerController : MonoBehaviour
         if (HasLionAbility && Input.GetKeyDown(KeyCode.Alpha1))
         {
             LionAbilityActive = true;
+            BuffaloAbilityActive = false;
+            RhinoAbilityActive = false;
+            LeopardAbilityActive = false;
+            ElephantAbilityActive = false;
         }
 
         if (HasBuffaloAbility && Input.GetKeyDown(KeyCode.Alpha2))
         {
+            LionAbilityActive = false;
             BuffaloAbilityActive = true;
+            RhinoAbilityActive = false;
+            LeopardAbilityActive = false;
+            ElephantAbilityActive = false; 
         }
 
         if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha3))
         {
+            LionAbilityActive = false;
+            BuffaloAbilityActive = false;
             RhinoAbilityActive = true;
+            LeopardAbilityActive = false;
+            ElephantAbilityActive = false;
         }
 
         if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha4))
         {
+            LionAbilityActive = false;
+            BuffaloAbilityActive = false;
+            RhinoAbilityActive = false;
             LeopardAbilityActive = true;
+            ElephantAbilityActive = false;
         }
 
         if (HasElephantAbility && Input.GetKeyDown(KeyCode.Alpha5))
         {
+            LionAbilityActive = false;
+            BuffaloAbilityActive = false;
+            RhinoAbilityActive = false;
+            LeopardAbilityActive = false;
             ElephantAbilityActive = true;
         }
 
