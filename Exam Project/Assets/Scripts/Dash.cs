@@ -12,6 +12,7 @@ public class Dash : MonoBehaviour
     public float DashSpeed;
     public UI uiscript;
 
+
     // Start is called before the first frame update
     void Start()
     {

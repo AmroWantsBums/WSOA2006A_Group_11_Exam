@@ -41,10 +41,13 @@ public class PlayerController : MonoBehaviour
     //Vide Code
     public VideoPlayer RhinoVideo;
     public VideoPlayer BuffaloVideo;
+    public VideoPlayer LeopardVideo;
     public GameObject RhinoVideoObject;
     public GameObject BuffaloVideoObject;
+    public GameObject LeopardVideoObject;
     public RawImage RhinoImage;
     public RawImage BuffaloImage;
+    public RawImage LeopardImage;
 
 
     void Start()
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         paintingState = GameObject.Find("Canvas").GetComponent<PaintingState>();
         RhinoVideo.loopPointReached += OnVideoEnd;
         BuffaloVideo.loopPointReached += OnVideoEnd;
+        LeopardVideo.loopPointReached += OnVideoEnd;
         //Call State Machine Script
         sms = GetComponent<StateMachineScript>();
     }
@@ -130,6 +134,12 @@ public class PlayerController : MonoBehaviour
                     Instantiate(AbilityGFX, transform.position, Quaternion.identity);
                     StartCoroutine(PlayRhinoVideo());
                 }
+                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LeopardWallPainting")
+                {
+                    HasLeopardAbility = true;
+                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                    StartCoroutine(PlayLeopardVideo());
+                }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     IsViewing = true;
@@ -201,6 +211,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PlayRhinoVideo()
     {
         yield return new WaitForSeconds(2f);
+        RhinoImage.enabled = true;
         RhinoVideoObject.SetActive(true);
         RhinoVideo.Play();
         GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
@@ -213,8 +224,22 @@ public class PlayerController : MonoBehaviour
     IEnumerator PlayBuffaloVideo()
     {
         yield return new WaitForSeconds(2f);
+        BuffaloImage.enabled = true;
         BuffaloVideoObject.SetActive(true);
         BuffaloVideo.Play();
+        GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
+        foreach (GameObject f in GFXs)
+        {
+            Destroy(f);
+        }
+    }
+
+    IEnumerator PlayLeopardVideo()
+    {
+        yield return new WaitForSeconds(2f);
+        LeopardImage.enabled = true;
+        LeopardVideoObject.SetActive(true);
+        LeopardVideo.Play();
         GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
         foreach (GameObject f in GFXs)
         {
@@ -227,5 +252,6 @@ public class PlayerController : MonoBehaviour
         vp.enabled = false;
         RhinoImage.enabled = false;
         BuffaloImage.enabled = false;
+        LeopardImage.enabled = false;
     }
 }

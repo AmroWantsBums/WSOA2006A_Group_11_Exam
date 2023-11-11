@@ -8,24 +8,55 @@ public class Climb : MonoBehaviour
     public bool Climbing = false;
     public float moveSpeed;
     public Rigidbody PlayerRb;
- 
+    public float RayLength;
+    public float RayOffset;
+    public Vector3 RaySpawnPoint;
+    public UI uiscript; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        RaySpawnPoint = transform.position + new Vector3(0f, RayOffset, 0f);
+        RaycastHit Hit;
+        Debug.DrawRay(RaySpawnPoint, transform.TransformDirection(Vector3.forward) * RayLength, Color.white);
+        if (playerController.LeopardAbilityActive)
+        {
+            if (Physics.Raycast(RaySpawnPoint, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
+            {
+                if (Hit.transform.gameObject.CompareTag("Climbable"))
+                {
+                    Climbing = true;
+                    Debug.Log("Climb");
+                }
+            }
+            else
+            {
+                Debug.Log("No ClimbThing");
+                Climbing = false;                
+            }
+        }        
+
         if (Climbing)
         {
+            playerController.enabled = false;
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(0.0f, verticalInput, 0.0f) * moveSpeed * Time.deltaTime;
             transform.Translate(movement);
             PlayerRb.useGravity = false;
             PlayerRb.mass = 0f;
+        }
+        else
+        {
+            playerController.enabled = true;
+            PlayerRb.useGravity = true;
+            PlayerRb.mass = 1f;
+            
         }
     }
 
@@ -33,19 +64,8 @@ public class Climb : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Climbable"))
         {
-            Climbing = true;
-            playerController.enabled = false;
-        }
-    }
-
-    void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.CompareTag("Climbable"))
-        {
-            Climbing = false;
-            playerController.enabled = true;
-            PlayerRb.useGravity = true;
-            PlayerRb.mass = 1f;
+            playerController.LeopardAbilityActive = false;
+            uiscript.Reset();
         }
     }
 }
