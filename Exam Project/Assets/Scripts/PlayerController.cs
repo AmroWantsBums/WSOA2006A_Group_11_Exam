@@ -42,12 +42,15 @@ public class PlayerController : MonoBehaviour
     public VideoPlayer RhinoVideo;
     public VideoPlayer BuffaloVideo;
     public VideoPlayer LeopardVideo;
+    public VideoPlayer ElephantVideo;
     public GameObject RhinoVideoObject;
     public GameObject BuffaloVideoObject;
     public GameObject LeopardVideoObject;
+    public GameObject ElephantVideoObject;
     public RawImage RhinoImage;
     public RawImage BuffaloImage;
     public RawImage LeopardImage;
+    public RawImage ElephantImage;
 
 
     void Start()
@@ -59,6 +62,7 @@ public class PlayerController : MonoBehaviour
         RhinoVideo.loopPointReached += OnVideoEnd;
         BuffaloVideo.loopPointReached += OnVideoEnd;
         LeopardVideo.loopPointReached += OnVideoEnd;
+        ElephantVideo.loopPointReached += OnVideoEnd;
         //Call State Machine Script
         sms = GetComponent<StateMachineScript>();
     }
@@ -139,6 +143,12 @@ public class PlayerController : MonoBehaviour
                     HasLeopardAbility = true;
                     Instantiate(AbilityGFX, transform.position, Quaternion.identity);
                     StartCoroutine(PlayLeopardVideo());
+                }
+                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "ElephantWallPainting")
+                {
+                    HasElephantAbility = true;
+                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                    StartCoroutine(PlayElephantVideo());
                 }
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
@@ -247,11 +257,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator PlayElephantVideo()
+    {
+        yield return new WaitForSeconds(2f);
+        ElephantImage.enabled = true;
+        ElephantVideoObject.SetActive(true);
+        ElephantVideo.Play();
+        GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
+        foreach (GameObject f in GFXs)
+        {
+            Destroy(f);
+        }
+    }
+
     void OnVideoEnd(VideoPlayer vp)
     {
         vp.enabled = false;
         RhinoImage.enabled = false;
         BuffaloImage.enabled = false;
         LeopardImage.enabled = false;
+        ElephantImage.enabled = false;
     }
 }
