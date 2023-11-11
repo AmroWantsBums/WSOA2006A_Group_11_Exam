@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool HasBuffaloAbility = false;
     public bool BuffaloAbilityActive = false;
     public bool HasRhinoAbility = false;
-    public bool RhinoAbilityActive = false;   
+    public bool RhinoAbilityActive = false;
     public bool HasElephantAbility = false;
     public bool ElephantAbilityActive = false;
     public bool HasLeopardAbility = false;
@@ -40,8 +40,11 @@ public class PlayerController : MonoBehaviour
 
     //Vide Code
     public VideoPlayer RhinoVideo;
+    public VideoPlayer BuffaloVideo;
     public GameObject RhinoVideoObject;
+    public GameObject BuffaloVideoObject;
     public RawImage RhinoImage;
+    public RawImage BuffaloImage;
 
 
     void Start()
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();
         paintingState = GameObject.Find("Canvas").GetComponent<PaintingState>();
         RhinoVideo.loopPointReached += OnVideoEnd;
+        BuffaloVideo.loopPointReached += OnVideoEnd;
         //Call State Machine Script
         sms = GetComponent<StateMachineScript>();
     }
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
                 {
                     HasBuffaloAbility = true;
+                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                    StartCoroutine(PlayBuffaloVideo());
                 }
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "RhinoWallPainting")
                 {
@@ -198,7 +204,19 @@ public class PlayerController : MonoBehaviour
         RhinoVideoObject.SetActive(true);
         RhinoVideo.Play();
         GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
-        foreach(GameObject f in GFXs)
+        foreach (GameObject f in GFXs)
+        {
+            Destroy(f);
+        }
+    }
+
+    IEnumerator PlayBuffaloVideo()
+    {
+        yield return new WaitForSeconds(2f);
+        BuffaloVideoObject.SetActive(true);
+        BuffaloVideo.Play();
+        GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
+        foreach (GameObject f in GFXs)
         {
             Destroy(f);
         }
@@ -208,5 +226,6 @@ public class PlayerController : MonoBehaviour
     {
         vp.enabled = false;
         RhinoImage.enabled = false;
+        BuffaloImage.enabled = false;
     }
 }
