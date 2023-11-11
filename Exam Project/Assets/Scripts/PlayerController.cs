@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
             ElephantAbilityActive = false; 
         }
 
-        if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha3))
+        if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha4))
         {
             LionAbilityActive = false;
             BuffaloAbilityActive = false;
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
             ElephantAbilityActive = false;
         }
 
-        if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha4))
+        if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha3))
         {
             LionAbilityActive = false;
             BuffaloAbilityActive = false;
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("Ground"))
+        if (col.gameObject.CompareTag("Ground") || col.gameObject.CompareTag("Liftable"))
         {
             IsGrounded = true;
         }

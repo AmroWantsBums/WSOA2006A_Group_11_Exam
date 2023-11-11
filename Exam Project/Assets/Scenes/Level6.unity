@@ -1142,6 +1142,8 @@ GameObject:
   - component: {fileID: 428641307}
   - component: {fileID: 428641306}
   - component: {fileID: 428641313}
+  - component: {fileID: 428641314}
+  - component: {fileID: 428641315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1352,6 +1354,47 @@ MonoBehaviour:
   Dashing: 0
   DashSpeed: 15
   uiscript: {fileID: 1936638320}
+--- !u!114 &428641314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428641304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efb043df7966354fa7f6edfe87b5ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RayLength: 2.49
+  PullLeverText: {fileID: 1337212692}
+  playerController: {fileID: 0}
+  LeverPulled: 0
+  speed: 0.67
+  GateObject: {fileID: 0}
+  PositionToMoveTo: {fileID: 0}
+  uiscript: {fileID: 1936638320}
+--- !u!114 &428641315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428641304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa63aa8ba49a814ebe5561df5b645bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CarryPoint: {x: 0, y: 0, z: 0}
+  CarryPointObject: {fileID: 1817704420}
+  RayLength: 0
+  PickupTxt: {fileID: 329024856}
+  PickupTxtObject: {fileID: 329024854}
+  Holding: 0
+  ObjectToDrop: {fileID: 0}
+  playerController: {fileID: 0}
+  UiScript: {fileID: 1936638320}
 --- !u!1 &434157488
 GameObject:
   m_ObjectHideFlags: 0
