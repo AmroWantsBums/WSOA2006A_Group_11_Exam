@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
     public GameObject DialogueAvailableTxt;
     public bool CanViewDialogue = false;
     public GameObject AbilityGFX;
+    public RawImage Painting;
+    public Texture LionPainting;
+    public Texture RhinoPainting;
+    public Texture BuffalPainting;
+    public Texture LeopardPainting;
+    public Texture ElephantPainting;
     //Ability bools
     public bool HasLionAbility = false;
     public bool LionAbilityActive = false;
@@ -39,14 +45,17 @@ public class PlayerController : MonoBehaviour
 
 
     //Vide Code
+    public VideoPlayer LionVideo;
     public VideoPlayer RhinoVideo;
     public VideoPlayer BuffaloVideo;
     public VideoPlayer LeopardVideo;
     public VideoPlayer ElephantVideo;
+    public GameObject LionVideoObject;
     public GameObject RhinoVideoObject;
     public GameObject BuffaloVideoObject;
     public GameObject LeopardVideoObject;
     public GameObject ElephantVideoObject;
+    public RawImage LionImage;
     public RawImage RhinoImage;
     public RawImage BuffaloImage;
     public RawImage LeopardImage;
@@ -63,6 +72,7 @@ public class PlayerController : MonoBehaviour
         BuffaloVideo.loopPointReached += OnVideoEnd;
         LeopardVideo.loopPointReached += OnVideoEnd;
         ElephantVideo.loopPointReached += OnVideoEnd;
+        LionVideo.loopPointReached += OnVideoEnd;
         //Call State Machine Script
         sms = GetComponent<StateMachineScript>();
     }
@@ -125,6 +135,7 @@ public class PlayerController : MonoBehaviour
                 {
                     HasLionAbility = true;
                     Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                    StartCoroutine(PlayLionVideo());
                 }
                 if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
                 {
@@ -150,10 +161,73 @@ public class PlayerController : MonoBehaviour
                     Instantiate(AbilityGFX, transform.position, Quaternion.identity);
                     StartCoroutine(PlayElephantVideo());
                 }
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LionWallPainting")
                 {
-                    IsViewing = true;
+                    if (!IsViewing)
+                    {
+                        IsViewing = true;
+                        Painting.texture = LionPainting;
+                    }
+                    else
+                    {
+                        IsViewing = false;
+                    }
                 }
+
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "RhinoWallPainting")
+                {
+                    if (!IsViewing)
+                    {
+                        IsViewing = true;
+                        Painting.texture = RhinoPainting;
+                    }
+                    else
+                    {
+                        IsViewing = false;
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "BuffaloWallPainting")
+                {
+                    if (!IsViewing)
+                    {
+                        IsViewing = true;
+                        Painting.texture = BuffalPainting;
+                    }
+                    else
+                    {
+                        IsViewing = false;
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LeopardWallPainting")
+                {
+                    if (!IsViewing)
+                    {
+                        IsViewing = true;
+                        Painting.texture = LeopardPainting;
+                    }
+                    else
+                    {
+                        IsViewing = false;
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "ElephantWallPainting")
+                {
+                    if (!IsViewing)
+                    {
+                        IsViewing = true;
+                        Painting.texture = ElephantPainting;
+                    }
+                    else
+                    {
+                        IsViewing = false;
+                    }
+                }
+
 
                 if (IsViewing)
                 {
@@ -238,6 +312,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator PlayLionVideo()
+    {
+        yield return new WaitForSeconds(2f);
+        LionImage.enabled = true;
+        LionVideoObject.SetActive(true);
+        LionVideo.Play();
+        GameObject[] GFXs = GameObject.FindGameObjectsWithTag("AbilityCircle");
+        foreach (GameObject f in GFXs)
+        {
+            Destroy(f);
+        }
+    }
+
     IEnumerator PlayRhinoVideo()
     {
         yield return new WaitForSeconds(2f);
@@ -297,5 +384,6 @@ public class PlayerController : MonoBehaviour
         BuffaloImage.enabled = false;
         LeopardImage.enabled = false;
         ElephantImage.enabled = false;
+        LionImage.enabled = false;
     }
 }

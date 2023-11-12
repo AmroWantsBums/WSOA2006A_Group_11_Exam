@@ -5,7 +5,6 @@ using UnityEngine;
 public class PaintingState : MonoBehaviour
 {
     public Animator anim;
-    public bool IsViewing;
     public GameObject ViewPaintingTxt;
     public GameObject HidePaintingTxt;
     public PlayerController playerController;
@@ -22,7 +21,7 @@ public class PaintingState : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.CanView)
         {
-            if (IsViewing)
+            if (playerController.IsViewing)
             {
                 HidePainting();
             }
@@ -31,13 +30,11 @@ public class PaintingState : MonoBehaviour
                 ShowPainting();
             }
         }
-
     }
 
     public void ShowPainting()
     {
         anim.SetBool("IsViewing", true);
-        IsViewing = true;
         ViewPaintingTxt.SetActive(false);
         HidePaintingTxt.SetActive(true);
     }
@@ -45,10 +42,9 @@ public class PaintingState : MonoBehaviour
     public void HidePainting()
     {
         anim.SetBool("IsViewing", false);
-        IsViewing = false;
         ViewPaintingTxt.SetActive(true);
         HidePaintingTxt.SetActive(false);
         playerController.CanView = false;
-        playerController.IsViewing = false;
+        //playerController.IsViewing = false;
     }
 }
