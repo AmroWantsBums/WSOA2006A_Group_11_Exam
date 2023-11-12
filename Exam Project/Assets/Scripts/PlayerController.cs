@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     //Animation Code:
     public StateMachineScript sms;
     public UI uiscript;
+    public Animator anim;
 
 
     //Vide Code
@@ -94,6 +95,12 @@ public class PlayerController : MonoBehaviour
 
             IsGrounded = false;
         }
+
+        if (!IsGrounded)
+        {
+            anim.SetBool("IsJumping", true);
+        }
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         if (Input.GetKey("left shift"))
@@ -105,6 +112,17 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed = 8f;
         }
+
+        if (Input.GetKeyDown("w"))
+        {
+            anim.SetBool("IsWalking", true);
+        }
+         
+        if (Input.GetKeyUp("w"))
+        {
+            anim.SetBool("IsWalking", false);
+        }
+
         Vector3 movement = new Vector3(0.0f, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
         float mouseX = Input.GetAxis("Mouse X");
@@ -295,12 +313,12 @@ public class PlayerController : MonoBehaviour
 
         if (verticalInput == 0)
         {
-            sms.walk = false;
+            //sms.walk = false;
         }
         else
         {
             //play walking animation
-            sms.walk = true;
+            //sms.walk = true;
         }
     }
 
@@ -309,6 +327,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Ground") || col.gameObject.CompareTag("Liftable"))
         {
             IsGrounded = true;
+            anim.SetBool("IsJumping", false);
         }
     }
 

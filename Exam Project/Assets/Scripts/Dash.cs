@@ -11,7 +11,7 @@ public class Dash : MonoBehaviour
     public bool Dashing = false;
     public float DashSpeed;
     public UI uiscript;
-
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,8 @@ public class Dash : MonoBehaviour
             if (Input.GetKey("f") && !Dashing)
             {
                 PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
-                Dashing = true;                
+                Dashing = true;
+                anim.SetBool("IsDashing", true);
                 StartCoroutine(DashReset());
             }
         }
@@ -57,6 +58,7 @@ public class Dash : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Dashing = false;
+        anim.SetBool("IsDashing", false);
         playerController.RhinoAbilityActive = false;
         uiscript.Reset();
     }

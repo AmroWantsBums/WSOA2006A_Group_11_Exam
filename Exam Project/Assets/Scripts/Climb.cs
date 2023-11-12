@@ -11,8 +11,8 @@ public class Climb : MonoBehaviour
     public float RayLength;
     public float RayOffset;
     public Vector3 RaySpawnPoint;
-    public UI uiscript; 
-
+    public UI uiscript;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +44,14 @@ public class Climb : MonoBehaviour
 
         if (Climbing)
         {
+            anim.SetBool("IsClimbing", true);
             playerController.enabled = false;
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(0.0f, verticalInput, 0.0f) * moveSpeed * Time.deltaTime;
             transform.Translate(movement);
             PlayerRb.useGravity = false;
             PlayerRb.mass = 0f;
+            PlayerRb.constraints = RigidbodyConstraints.FreezeRotation;
         }
         else
         {
@@ -66,6 +68,7 @@ public class Climb : MonoBehaviour
         {
             playerController.LeopardAbilityActive = false;
             uiscript.Reset();
+            anim.SetBool("IsClimbing", false);
         }
     }
 }
