@@ -12,6 +12,9 @@ public class ElephantAbility : MonoBehaviour
     public GameObject GateObject;
     public GameObject PositionToMoveTo;
     public UI uiscript;
+    public Animator anim;
+    public bool AnimPlayed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,16 +48,27 @@ public class ElephantAbility : MonoBehaviour
         {
             PullLever(GateObject);
             playerController.ElephantAbilityActive = false;
+            StartCoroutine(ResetAnimation());
         }
     }
 
 
     void PullLever(GameObject Gate)
     {
+        if (!AnimPlayed)
+        {
+            anim.SetBool("PullLever", true);
+            AnimPlayed = true;
+        }
         float step = speed * Time.deltaTime;
         float distance = Vector3.Distance(Gate.transform.position, PositionToMoveTo.transform.position);
         Gate.transform.position = Vector3.MoveTowards(Gate.transform.position, PositionToMoveTo.transform.position, Mathf.Min(step, distance));
         uiscript.Reset();
     }
 
+    IEnumerator ResetAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("PullLever", false);
+    }
 }

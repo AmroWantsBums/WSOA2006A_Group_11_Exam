@@ -24,7 +24,7 @@ public class Climb : MonoBehaviour
     {
         RaySpawnPoint = transform.position + new Vector3(0f, RayOffset, 0f);
         RaycastHit Hit;
-        Debug.DrawRay(RaySpawnPoint, transform.TransformDirection(Vector3.forward) * RayLength, Color.white);
+        Debug.DrawRay(RaySpawnPoint, transform.TransformDirection(Vector3.forward) * RayLength, Color.blue);
         if (playerController.LeopardAbilityActive)
         {
             if (Physics.Raycast(RaySpawnPoint, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
@@ -33,6 +33,7 @@ public class Climb : MonoBehaviour
                 {
                     Climbing = true;
                     Debug.Log("Climb");
+                    RayOffset = -0.49f;
                 }
             }
             else
@@ -66,6 +67,7 @@ public class Climb : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Climbable"))
         {
+            Climbing = false;
             playerController.LeopardAbilityActive = false;
             uiscript.Reset();
             anim.SetBool("IsClimbing", false);
