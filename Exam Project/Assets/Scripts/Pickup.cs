@@ -14,6 +14,7 @@ public class Pickup : MonoBehaviour
     public GameObject ObjectToDrop;
     public PlayerController playerController;
     public UI UiScript;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class Pickup : MonoBehaviour
         {
             playerController.BuffaloAbilityActive = false;
             DropObject(ObjectToDrop);
+            anim.SetBool("IsPushing", false);
         }
     }
 
@@ -67,6 +69,7 @@ public class Pickup : MonoBehaviour
     {
         Holding = true;
         ObjectToDrop = PickedObject;
+        anim.SetBool("IsPushing", true);
     }
 
     void DropObject(GameObject PickedObject)

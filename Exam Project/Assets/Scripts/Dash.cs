@@ -10,6 +10,8 @@ public class Dash : MonoBehaviour
     public Rigidbody PlayerRb;
     public bool Dashing = false;
     public float DashSpeed;
+    public UI uiscript;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class Dash : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (playerController.RhinoAbilityActive)
         {
@@ -33,16 +35,14 @@ public class Dash : MonoBehaviour
                     BreakWallText.SetActive(true);
                 }
             }
-            if (playerController.RhinoAbilityActive)
+            if (Input.GetKey("f") && !Dashing)
             {
-                if (Input.GetKey("f"))
-                {
-                    Dashing = true;
-                    PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
-                    //playerController.RhinoAbilityActive = false;
-                }
+                PlayerRb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
+                Dashing = true;
+                anim.SetBool("IsDashing", true);
+                StartCoroutine(DashReset());
             }
-        }       
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -50,7 +50,16 @@ public class Dash : MonoBehaviour
         if (Dashing && collision.gameObject.CompareTag("Breakable"))
         {
             Destroy(collision.gameObject);
-            Dashing = false;
+            PlayerRb.AddForce(transform.forward * -DashSpeed, ForceMode.Impulse);
         }
+    }
+
+    IEnumerator DashReset()
+    {
+        yield return new WaitForSeconds(1f);
+        Dashing = false;
+        anim.SetBool("IsDashing", false);
+        playerController.RhinoAbilityActive = false;
+        uiscript.Reset();
     }
 }

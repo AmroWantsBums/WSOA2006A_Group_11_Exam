@@ -472,7 +472,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 237271297}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &117648343
 BoxCollider:
@@ -1103,7 +1103,6 @@ GameObject:
   - component: {fileID: 237271300}
   - component: {fileID: 237271301}
   - component: {fileID: 237271302}
-  - component: {fileID: 237271303}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1185,7 +1184,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237271291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1240,6 +1239,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1601509719}
   - {fileID: 963194228}
   - {fileID: 117648342}
   - {fileID: 1644724569}
@@ -1301,6 +1301,7 @@ MonoBehaviour:
   Climbing: 0
   moveSpeed: 2
   PlayerRb: {fileID: 237271293}
+  sms: {fileID: 237271302}
 --- !u!114 &237271301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,30 +1329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSuccess: 0
+  anim: {fileID: 1601509718}
+  jump: 0
   sprintSuccess: 0
   walk: 0
   grab: 0
---- !u!95 &237271303
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237271291}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6b2c80cff3ee464b9e7d22c327a12ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  idle: 0
+  climb: 0
 --- !u!1 &332978299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,6 +2602,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &930079301
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 237271297}
+    m_Modifications:
+    - target: {fileID: -2367702098957471673, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a274ded89bf3e4f4ab1dac0bd60ed936, type: 2}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.558
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077113838580281154, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+      propertyPath: m_Name
+      value: Player_Model
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,7 +2745,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 237271297}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 24.82, y: 0, z: 0}
 --- !u!1 &1142414500
 GameObject:
@@ -4368,6 +4413,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530838858}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1601509718 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -2367702098957471673, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+  m_PrefabInstance: {fileID: 930079301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1601509719 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3737708156325230072, guid: 76aae8c0075385040ad1822f12ecec95, type: 3}
+  m_PrefabInstance: {fileID: 930079301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1605496075
 GameObject:
   m_ObjectHideFlags: 0
@@ -4836,7 +4891,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 237271297}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!81 &1644724570
 AudioListener:
