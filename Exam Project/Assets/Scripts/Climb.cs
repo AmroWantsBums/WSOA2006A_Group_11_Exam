@@ -13,6 +13,9 @@ public class Climb : MonoBehaviour
     public Vector3 RaySpawnPoint;
     public UI uiscript;
     public Animator anim;
+    public StateMachineScript sms;
+ 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +50,7 @@ public class Climb : MonoBehaviour
         {
             anim.SetBool("IsClimbing", true);
             playerController.enabled = false;
+            sms.climb = true;
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(0.0f, verticalInput, 0.0f) * moveSpeed * Time.deltaTime;
             transform.Translate(movement);
@@ -60,6 +64,10 @@ public class Climb : MonoBehaviour
             PlayerRb.useGravity = true;
             PlayerRb.mass = 1f;
             
+        }
+        else
+        {
+            sms.climb = false;
         }
     }
 

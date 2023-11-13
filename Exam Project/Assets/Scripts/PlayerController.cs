@@ -81,11 +81,11 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Input.GetKeyDown("space") && IsGrounded)
-        {
+        {  //play jump animation
+            sms.jump = true;
             Debug.Log("Jump");
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
-            //play jump animation
-            //sms.jumpSuccess = true;
+           
             if (LionAbilityActive)
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
@@ -94,6 +94,11 @@ public class PlayerController : MonoBehaviour
             }
 
             IsGrounded = false;
+           
+        }
+        else
+        {
+            sms.jump = false;
         }
 
         if (!IsGrounded)
@@ -106,11 +111,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("left shift"))
         {
             Debug.Log("Sprinting");
+            sms.sprintSuccess = true;
             moveSpeed = 12f;
         }
         else
         {
             moveSpeed = 8f;
+            sms.sprintSuccess = false;
         }
 
         if (Input.GetKeyDown("w"))
@@ -313,7 +320,8 @@ public class PlayerController : MonoBehaviour
 
         if (verticalInput == 0)
         {
-            //sms.walk = false;
+            sms.walk = false;
+            
         }
         else
         {
