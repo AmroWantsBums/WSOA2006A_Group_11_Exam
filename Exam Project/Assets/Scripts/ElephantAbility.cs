@@ -7,6 +7,13 @@ public class ElephantAbility : MonoBehaviour
     public float RayLength;
     public GameObject PullLeverText;
     public PlayerController playerController;
+    public bool LeverPulled = false;
+    public float speed;
+    public GameObject GateObject;
+    public GameObject PositionToMoveTo;
+    public UI uiscript;
+    public Animator anim;
+    public bool AnimPlayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,24 +27,48 @@ public class ElephantAbility : MonoBehaviour
         if (playerController.ElephantAbilityActive)
         {
             PullLeverText.SetActive(false);
-            RaycastHit Hit;
+            RaycastHit hit;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, RayLength))
             {
-                if (Hit.transform.gameObject.CompareTag("Lever"))
+                if (hit.transform.gameObject.CompareTag("Lever"))
                 {
                     PullLeverText.SetActive(true);
+
                     if (Input.GetKeyDown("f"))
                     {
-                        PullLever();
+                        LeverPulled = true;
+                        PullLeverText.SetActive(false);
                     }
                 }
-            }
+            }            
+        }
+        if (LeverPulled)
+        {
+            PullLever(GateObject);
+            playerController.ElephantAbilityActive = false;
+            StartCoroutine(ResetAnimation());
         }
     }
 
-    void PullLever()
+
+    void PullLever(GameObject Gate)
     {
-        //whatever it needs to do
+        if (!AnimPlayed)
+        {
+            anim.SetBool("PullLever", true);
+            AnimPlayed = true;
+        }
+        float step = speed * Time.deltaTime;
+        float distance = Vector3.Distance(Gate.transform.position, PositionToMoveTo.transform.position);
+        Gate.transform.position = Vector3.MoveTowards(Gate.transform.position, PositionToMoveTo.transform.position, Mathf.Min(step, distance));
+        uiscript.Reset();
+    }
+
+    IEnumerator ResetAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("PullLever", false);
     }
 }
