@@ -8,6 +8,7 @@ public class Climb : MonoBehaviour
     public bool Climbing = false;
     public float moveSpeed;
     public Rigidbody PlayerRb;
+    public StateMachineScript sms;
  
 
     // Start is called before the first frame update
@@ -21,11 +22,16 @@ public class Climb : MonoBehaviour
     {
         if (Climbing)
         {
+            sms.climb = true;
             float verticalInput = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(0.0f, verticalInput, 0.0f) * moveSpeed * Time.deltaTime;
             transform.Translate(movement);
             PlayerRb.useGravity = false;
             PlayerRb.mass = 0f;
+        }
+        else
+        {
+            sms.climb = false;
         }
     }
 

@@ -49,11 +49,11 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Input.GetKeyDown("space") && IsGrounded)
-        {
+        {  //play jump animation
+            sms.jump = true;
             Debug.Log("Jump");
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
-            //play jump animation
-            //sms.jumpSuccess = true;
+           
             if (LionAbilityActive)
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
@@ -62,17 +62,24 @@ public class PlayerController : MonoBehaviour
             }
 
             IsGrounded = false;
+           
+        }
+        else
+        {
+            sms.jump = false;
         }
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         if (Input.GetKey("left shift"))
         {
             Debug.Log("Sprinting");
+            sms.sprintSuccess = true;
             moveSpeed = 12f;
         }
         else
         {
             moveSpeed = 8f;
+            sms.sprintSuccess = false;
         }
         Vector3 movement = new Vector3(0.0f, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
@@ -164,6 +171,7 @@ public class PlayerController : MonoBehaviour
         if (verticalInput == 0)
         {
             sms.walk = false;
+            
         }
         else
         {

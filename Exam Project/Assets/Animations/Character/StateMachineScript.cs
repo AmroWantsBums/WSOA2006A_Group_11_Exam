@@ -4,30 +4,48 @@ using UnityEngine;
 
 public class StateMachineScript : MonoBehaviour
 {
-    Animator anim;
+    public Animator anim;
 
-    public bool jumpSuccess;
+    public bool jump;
     public bool sprintSuccess;
     public bool walk;
     public bool grab;
+    public bool idle;
+    public bool climb;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        
       
     }
 
     void Update()
     {
-        if (jumpSuccess)
+        if(climb)
+        {
+            anim.SetBool("Climb", true);
+        }
+        else
+        {
+            anim.SetBool("Climb", false);
+        }
+        if (jump)
         {
             anim.SetBool("Jump", true);
-            jumpSuccess = false;
+          
+        }
+        else
+        {
+            anim.SetBool("Jump", false);
         }
 
         if(sprintSuccess)
         {
             anim.SetBool("Sprint", true);
+        }
+        else
+        {
+            anim.SetBool("Sprint", false);
         }
 
         if(walk)
@@ -42,6 +60,11 @@ public class StateMachineScript : MonoBehaviour
         if(grab)
         {
             anim.SetBool("Grab", true);
+        }
+
+        if(idle)
+        {
+            anim.SetBool("Idle", true);
         }
     }
 }
