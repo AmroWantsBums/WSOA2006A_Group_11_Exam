@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         // Enable the pause menu UI
         pauseMenuUI.SetActive(true);
         playercontroller.enabled = false;
+        Cursor.visible = true;
     }
 
     void ResumeGame()
