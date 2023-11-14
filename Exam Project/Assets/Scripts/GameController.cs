@@ -9,7 +9,15 @@ public class GameController : MonoBehaviour
     {
         if (other.gameObject.name == "Player") 
         {
-            LoadNextLevel();
+            UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "Level7")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                LoadNextLevel();
+            }
         }
     }
 

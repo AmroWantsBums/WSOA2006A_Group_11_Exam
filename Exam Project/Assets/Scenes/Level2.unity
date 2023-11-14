@@ -4111,7 +4111,7 @@ MonoBehaviour:
   ElephantAbilityActive: 0
   HasLeopardAbility: 0
   LeopardAbilityActive: 0
-  sms: {fileID: 0}
+  sms: {fileID: 1270769181}
   uiscript: {fileID: 360134739}
   anim: {fileID: 1270769174}
   LionVideo: {fileID: 0}
