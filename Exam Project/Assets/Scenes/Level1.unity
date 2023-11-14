@@ -436,7 +436,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8284679210025592781, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
   m_PrefabInstance: {fileID: 1626179889}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &254221819
+--- !u!95 &254221820 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9095158026186171384, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
+  m_PrefabInstance: {fileID: 1626179889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &254221821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -452,15 +457,15 @@ MonoBehaviour:
   rotationSpeed: 1
   RayLength: 4.5
   ViewPaintingTxt: {fileID: 1647983019}
-  Rb: {fileID: 0}
+  Rb: {fileID: 254221823}
   JumpHeight: 8
   IsGrounded: 1
-  paintingState: {fileID: 0}
+  paintingState: {fileID: 750161889}
   CanView: 0
   IsViewing: 0
   GetAbilityTxt: {fileID: 1108508452}
   dialogueManager: {fileID: 1718338256}
-  DialogueAvailableTxt: {fileID: 2044721481}
+  DialogueAvailableTxt: {fileID: 1423276363}
   CanViewDialogue: 0
   AbilityGFX: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   Painting: {fileID: 1346564690}
@@ -479,16 +484,16 @@ MonoBehaviour:
   ElephantAbilityActive: 0
   HasLeopardAbility: 0
   LeopardAbilityActive: 0
-  sms: {fileID: 0}
+  sms: {fileID: 254221825}
   uiscript: {fileID: 750161888}
   anim: {fileID: 254221820}
   LionVideo: {fileID: 2022000189}
   RhinoVideo: {fileID: 2022000189}
-  BuffaloVideo: {fileID: 0}
-  LeopardVideo: {fileID: 0}
-  ElephantVideo: {fileID: 0}
+  BuffaloVideo: {fileID: 2022000189}
+  LeopardVideo: {fileID: 2022000189}
+  ElephantVideo: {fileID: 2022000189}
   LionVideoObject: {fileID: 2022000185}
-  RhinoVideoObject: {fileID: 2022000185}
+  RhinoVideoObject: {fileID: 0}
   BuffaloVideoObject: {fileID: 0}
   LeopardVideoObject: {fileID: 0}
   ElephantVideoObject: {fileID: 0}
@@ -497,11 +502,30 @@ MonoBehaviour:
   BuffaloImage: {fileID: 0}
   LeopardImage: {fileID: 0}
   ElephantImage: {fileID: 0}
---- !u!95 &254221820 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9095158026186171384, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
+--- !u!54 &254221823 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 9095158026186171389, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
   m_PrefabInstance: {fileID: 1626179889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &254221825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254221818}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 254221820}
+  jump: 0
+  sprintSuccess: 0
+  walk: 0
+  grab: 0
+  idle: 0
+  climb: 0
 --- !u!1001 &263103783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1945,7 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c617d753e30d4d4381fdd57a9a2aa78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 254221819}
+  playerController: {fileID: 254221821}
   InactiveMaterial: {fileID: 2100000, guid: d9512ea06c19c9c45b5b65fcb2028c29, type: 2}
   ActiveMaterial: {fileID: 2100000, guid: fa5f3a48f2d739d48909a0bdb4817d05, type: 2}
   LionImage: {fileID: 1498297391}
@@ -1975,7 +1999,7 @@ MonoBehaviour:
   anim: {fileID: 1346564691}
   ViewPaintingTxt: {fileID: 1647983019}
   HidePaintingTxt: {fileID: 955150087}
-  playerController: {fileID: 254221819}
+  playerController: {fileID: 0}
 --- !u!114 &750161890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3147,6 +3171,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3726847836019671611, guid: 45e0f06c750176947862c10346226439, type: 3}
+      propertyPath: nextLevelName
+      value: Level2
+      objectReference: {fileID: 0}
     - target: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -5576,7 +5604,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022000185}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 243cf8eece1b37749ab623a6d9ea9b10, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 40068f9a5fb64b9479e286dec0705b97, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -5587,7 +5615,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_PlaybackSpeed: 10
+  m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
@@ -5998,10 +6026,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSuccess: 0
+  anim: {fileID: 0}
+  jump: 0
   sprintSuccess: 0
   walk: 0
   grab: 0
+  idle: 0
+  climb: 0
 --- !u!54 &2111766467
 Rigidbody:
   m_ObjectHideFlags: 0

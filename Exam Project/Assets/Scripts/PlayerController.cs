@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("running");
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
         Cursor.visible = false;
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();
@@ -83,9 +84,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown("space") && IsGrounded)
         {  //play jump animation
             sms.jump = true;
-            Debug.Log("Jump");
             Rb.AddForce(transform.up * JumpHeight, ForceMode.Impulse);
-           
+
             if (LionAbilityActive)
             {
                 Rb.AddForce(transform.forward * 8, ForceMode.Impulse);
@@ -93,236 +93,248 @@ public class PlayerController : MonoBehaviour
                 uiscript.Reset();
             }
 
+
             IsGrounded = false;
+        }
 
             if (!IsGrounded)
-        {
-            anim.SetBool("IsJumping", true);
-        }
-
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        if (Input.GetKey("left shift"))
-        {
-            Debug.Log("Sprinting");
-            sms.sprintSuccess = true;
-            moveSpeed = 12f;
-        }
-        else
-        {
-            moveSpeed = 8f;
-            sms.sprintSuccess = false;
-        }
-
-        if (Input.GetKeyDown("w"))
-        {
-            anim.SetBool("IsWalking", true);
-        }
-         
-        if (Input.GetKeyUp("w"))
-        {
-            anim.SetBool("IsWalking", false);
-        }
-
-        Vector3 movement = new Vector3(0.0f, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement);
-        float mouseX = Input.GetAxis("Mouse X");
-        Vector3 rotation = new Vector3(0.0f, mouseX * rotationSpeed, 0.0f);
-        transform.Rotate(rotation);
-        DialogueAvailableTxt.SetActive(false);
-
-
-
-        RaycastHit Hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
-        {
-            if (Hit.transform.gameObject.CompareTag("NPC") && !CanViewDialogue)
             {
-                DialogueAvailableTxt.SetActive(true);
-                if (Input.GetKeyDown("f"))
+                anim.SetBool("IsJumping", true);
+            }
+
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            if (Input.GetKey("left shift"))
+            {
+                sms.sprintSuccess = true;
+                moveSpeed = 12f;
+            }
+            else
+            {
+                moveSpeed = 8f;
+                sms.sprintSuccess = false;
+            }
+
+            if (Input.GetKeyDown("w"))
+            {
+                anim.SetBool("IsWalking", true);
+            }
+
+            if (Input.GetKeyUp("w"))
+            {
+                anim.SetBool("IsWalking", false);
+            }
+
+            Vector3 movement = new Vector3(0.0f, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
+            transform.Translate(movement);
+            float mouseX = Input.GetAxis("Mouse X");
+            Vector3 rotation = new Vector3(0.0f, mouseX * rotationSpeed, 0.0f);
+            transform.Rotate(rotation);
+            DialogueAvailableTxt.SetActive(false);
+
+
+
+            RaycastHit Hit;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * RayLength, Color.green);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out Hit, RayLength))
+            {
+                if (Hit.transform.gameObject.CompareTag("NPC") && !CanViewDialogue)
                 {
-                    Debug.Log("Testsdfd");
-                    DialogueAvailableTxt.SetActive(false);
-                    CanViewDialogue = true;
+                    DialogueAvailableTxt.SetActive(true);
+                    if (Input.GetKeyDown("f"))
+                    {
+                        Debug.Log("Testsdfd");
+                        DialogueAvailableTxt.SetActive(false);
+                        CanViewDialogue = true;
+                    }
+                }
+                if (Hit.transform.gameObject.CompareTag("Animal"))
+                {
+                    CanView = true;
+                    if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LionWallPainting")
+                    {
+                        HasLionAbility = true;
+                        Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                        StartCoroutine(PlayLionVideo());
+                    }
+                    if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
+                    {
+                        HasBuffaloAbility = true;
+                        Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                        StartCoroutine(PlayBuffaloVideo());
+                    }
+                    if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "RhinoWallPainting")
+                    {
+                        HasRhinoAbility = true;
+                        Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                        StartCoroutine(PlayRhinoVideo());
+                    }
+                    if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LeopardWallPainting")
+                    {
+                        HasLeopardAbility = true;
+                        Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                        StartCoroutine(PlayLeopardVideo());
+                    }
+                    if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "ElephantWallPainting")
+                    {
+                        HasElephantAbility = true;
+                        Instantiate(AbilityGFX, transform.position, Quaternion.identity);
+                        StartCoroutine(PlayElephantVideo());
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LionWallPainting")
+                    {
+                        if (!IsViewing)
+                        {
+                            IsViewing = true;
+                            Painting.texture = LionPainting;
+                            paintingState.ShowPainting();
+                        }
+                        else
+                        {
+                            IsViewing = false;
+                            paintingState.HidePainting();
+                        }
+                    }
+
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "RhinoWallPainting")
+                    {
+                        if (!IsViewing)
+                        {
+                            IsViewing = true;
+                            Painting.texture = RhinoPainting;
+                            paintingState.ShowPainting();
+                        }
+                        else
+                        {
+                            IsViewing = false;
+                            paintingState.HidePainting();
+                        }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "BuffaloWallPainting")
+                    {
+                        if (!IsViewing)
+                        {
+                            IsViewing = true;
+                            Painting.texture = BuffalPainting;
+                            paintingState.ShowPainting();
+                        }
+                        else
+                        {
+                            IsViewing = false;
+                            paintingState.HidePainting();
+                        }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LeopardWallPainting")
+                    {
+                        if (!IsViewing)
+                        {
+                            IsViewing = true;
+                            Painting.texture = LeopardPainting;
+                            paintingState.ShowPainting();
+                        }
+                        else
+                        {
+                            IsViewing = false;
+                            paintingState.HidePainting();
+                        }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "ElephantWallPainting")
+                    {
+                        if (!IsViewing)
+                        {
+                            IsViewing = true;
+                            Painting.texture = ElephantPainting;
+                            paintingState.ShowPainting();
+                        }
+                        else
+                        {
+                            IsViewing = false;
+                            paintingState.HidePainting();
+                        }
+                    }
+
+
+                    if (IsViewing)
+                    {
+                        ViewPaintingTxt.SetActive(false);
+                        GetAbilityTxt.SetActive(false);
+                    }
+                    else
+                    {
+                        ViewPaintingTxt.SetActive(true);
+                        GetAbilityTxt.SetActive(true);
+                    }
                 }
             }
-            if (Hit.transform.gameObject.CompareTag("Animal"))
+            else
             {
-                CanView = true;
-                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LionWallPainting")
-                {
-                    HasLionAbility = true;
-                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
-                    StartCoroutine(PlayLionVideo());
-                }
-                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "BuffaloWallPainting")
-                {
-                    HasBuffaloAbility = true;
-                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
-                    StartCoroutine(PlayBuffaloVideo());
-                }
-                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "RhinoWallPainting")
-                {
-                    HasRhinoAbility = true;
-                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
-                    StartCoroutine(PlayRhinoVideo());
-                }
-                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "LeopardWallPainting")
-                {
-                    HasLeopardAbility = true;
-                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
-                    StartCoroutine(PlayLeopardVideo());
-                }
-                if (Input.GetKeyDown("f") && Hit.transform.gameObject.name == "ElephantWallPainting")
-                {
-                    HasElephantAbility = true;
-                    Instantiate(AbilityGFX, transform.position, Quaternion.identity);
-                    StartCoroutine(PlayElephantVideo());
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LionWallPainting")
-                {
-                    if (!IsViewing)
-                    {
-                        IsViewing = true;
-                        Painting.texture = LionPainting;
-                    }
-                    else
-                    {
-                        IsViewing = false;
-                    }
-                }
-
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "RhinoWallPainting")
-                {
-                    if (!IsViewing)
-                    {
-                        IsViewing = true;
-                        Painting.texture = RhinoPainting;
-                    }
-                    else
-                    {
-                        IsViewing = false;
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "BuffaloWallPainting")
-                {
-                    if (!IsViewing)
-                    {
-                        IsViewing = true;
-                        Painting.texture = BuffalPainting;
-                    }
-                    else
-                    {
-                        IsViewing = false;
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "LeopardWallPainting")
-                {
-                    if (!IsViewing)
-                    {
-                        IsViewing = true;
-                        Painting.texture = LeopardPainting;
-                    }
-                    else
-                    {
-                        IsViewing = false;
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift) && Hit.transform.gameObject.name == "ElephantWallPainting")
-                {
-                    if (!IsViewing)
-                    {
-                        IsViewing = true;
-                        Painting.texture = ElephantPainting;
-                    }
-                    else
-                    {
-                        IsViewing = false;
-                    }
-                }
-
-
-                if (IsViewing)
-                {
-                    ViewPaintingTxt.SetActive(false);
-                    GetAbilityTxt.SetActive(false);
-                }
-                else
-                {
-                    ViewPaintingTxt.SetActive(true);
-                    GetAbilityTxt.SetActive(true);
-                }
+                ViewPaintingTxt.SetActive(false);
+                GetAbilityTxt.SetActive(false);
             }
-        }
-        else
-        {
-            ViewPaintingTxt.SetActive(false);
-            GetAbilityTxt.SetActive(false);
-        }
 
-        if (HasLionAbility && Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            LionAbilityActive = true;
-            BuffaloAbilityActive = false;
-            RhinoAbilityActive = false;
-            LeopardAbilityActive = false;
-            ElephantAbilityActive = false;
-        }
+            if (HasLionAbility && Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                LionAbilityActive = true;
+                BuffaloAbilityActive = false;
+                RhinoAbilityActive = false;
+                LeopardAbilityActive = false;
+                ElephantAbilityActive = false;
+            }
 
-        if (HasBuffaloAbility && Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            LionAbilityActive = false;
-            BuffaloAbilityActive = true;
-            RhinoAbilityActive = false;
-            LeopardAbilityActive = false;
-            ElephantAbilityActive = false; 
-        }
+            if (HasBuffaloAbility && Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                LionAbilityActive = false;
+                BuffaloAbilityActive = true;
+                RhinoAbilityActive = false;
+                LeopardAbilityActive = false;
+                ElephantAbilityActive = false;
+            }
 
-        if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            LionAbilityActive = false;
-            BuffaloAbilityActive = false;
-            RhinoAbilityActive = true;
-            LeopardAbilityActive = false;
-            ElephantAbilityActive = false;
-        }
+            if (HasRhinoAbility && Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                LionAbilityActive = false;
+                BuffaloAbilityActive = false;
+                RhinoAbilityActive = true;
+                LeopardAbilityActive = false;
+                ElephantAbilityActive = false;
+            }
 
-        if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            LionAbilityActive = false;
-            BuffaloAbilityActive = false;
-            RhinoAbilityActive = false;
-            LeopardAbilityActive = true;
-            ElephantAbilityActive = false;
-        }
+            if (HasLeopardAbility && Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                LionAbilityActive = false;
+                BuffaloAbilityActive = false;
+                RhinoAbilityActive = false;
+                LeopardAbilityActive = true;
+                ElephantAbilityActive = false;
+            }
 
-        if (HasElephantAbility && Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            LionAbilityActive = false;
-            BuffaloAbilityActive = false;
-            RhinoAbilityActive = false;
-            LeopardAbilityActive = false;
-            ElephantAbilityActive = true;
-        }
+            if (HasElephantAbility && Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                LionAbilityActive = false;
+                BuffaloAbilityActive = false;
+                RhinoAbilityActive = false;
+                LeopardAbilityActive = false;
+                ElephantAbilityActive = true;
+            }
 
 
-        if (verticalInput == 0)
-        {
-            sms.walk = false;
-            
-        }
-        else
-        {
-            //play walking animation
-            //sms.walk = true;
-        }
+            if (verticalInput == 0)
+            {
+                sms.walk = false;
+
+            }
+            else
+            {
+                //play walking animation
+                //sms.walk = true;
+            }
     }
+
 
     void OnCollisionEnter(Collision col)
     {

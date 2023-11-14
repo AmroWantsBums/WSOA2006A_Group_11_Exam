@@ -797,6 +797,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3726847836019671611, guid: 45e0f06c750176947862c10346226439, type: 3}
+      propertyPath: nextLevelName
+      value: Level6
+      objectReference: {fileID: 0}
     - target: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2646,10 +2650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSuccess: 0
+  anim: {fileID: 0}
+  jump: 0
   sprintSuccess: 0
   walk: 0
   grab: 0
+  idle: 0
+  climb: 0
 --- !u!54 &884242211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3234,12 +3241,12 @@ MonoBehaviour:
   DialogueAvailableTxt: {fileID: 430239079}
   CanViewDialogue: 0
   AbilityGFX: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
-  Painting: {fileID: 0}
+  Painting: {fileID: 1444819100}
   LionPainting: {fileID: 0}
   RhinoPainting: {fileID: 0}
   BuffalPainting: {fileID: 0}
   LeopardPainting: {fileID: 0}
-  ElephantPainting: {fileID: 0}
+  ElephantPainting: {fileID: 2800000, guid: 87dbfe107fc2a2b4084df8f8dd75e314, type: 3}
   HasLionAbility: 0
   LionAbilityActive: 0
   HasBuffaloAbility: 0
@@ -3300,6 +3307,25 @@ MonoBehaviour:
   uiscript: {fileID: 119720766}
   anim: {fileID: 1090897946}
   AnimPlayed: 0
+--- !u!114 &1090897949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090897944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  jump: 0
+  sprintSuccess: 0
+  walk: 0
+  grab: 0
+  idle: 0
+  climb: 0
 --- !u!1001 &1094327702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6136,7 +6162,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026475758}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 243cf8eece1b37749ab623a6d9ea9b10, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 38184c97a91328f47a5f4a379062492a, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

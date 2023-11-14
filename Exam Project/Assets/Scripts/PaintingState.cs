@@ -19,7 +19,7 @@ public class PaintingState : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.CanView)
+        /*if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.CanView)
         {
             if (playerController.IsViewing)
             {
@@ -29,7 +29,7 @@ public class PaintingState : MonoBehaviour
             {
                 ShowPainting();
             }
-        }
+        }*/
     }
 
     public void ShowPainting()

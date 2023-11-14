@@ -1407,6 +1407,7 @@ MonoBehaviour:
   RaySpawnPoint: {x: 0, y: 0, z: 0}
   uiscript: {fileID: 1936638320}
   anim: {fileID: 0}
+  sms: {fileID: 0}
 --- !u!114 &428641307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,10 +1420,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSuccess: 0
+  anim: {fileID: 0}
+  jump: 0
   sprintSuccess: 0
   walk: 0
   grab: 0
+  idle: 0
+  climb: 0
 --- !u!54 &428641308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3555,6 +3559,7 @@ MonoBehaviour:
   RaySpawnPoint: {x: 0, y: 0, z: 0}
   uiscript: {fileID: 1936638320}
   anim: {fileID: 1070907210}
+  sms: {fileID: 1070907213}
 --- !u!114 &1070907209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3626,6 +3631,25 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 9095158026186171389, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
   m_PrefabInstance: {fileID: 1121258611}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1070907213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070907204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  jump: 0
+  sprintSuccess: 0
+  walk: 0
+  grab: 0
+  idle: 0
+  climb: 0
 --- !u!1001 &1121258611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5937,6 +5961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3726847836019671611, guid: 45e0f06c750176947862c10346226439, type: 3}
+      propertyPath: nextLevelName
+      value: Level7
+      objectReference: {fileID: 0}
     - target: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
       propertyPath: m_RootOrder
       value: 3

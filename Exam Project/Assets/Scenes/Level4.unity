@@ -219,10 +219,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSuccess: 0
+  anim: {fileID: 0}
+  jump: 0
   sprintSuccess: 0
   walk: 0
   grab: 0
+  idle: 0
+  climb: 0
 --- !u!54 &45926590
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -341,6 +344,7 @@ MonoBehaviour:
   RaySpawnPoint: {x: 0, y: 0, z: 0}
   uiscript: {fileID: 1222260186}
   anim: {fileID: 0}
+  sms: {fileID: 0}
 --- !u!1 &62305576
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +957,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352287288}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 243cf8eece1b37749ab623a6d9ea9b10, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 6b9cd5a69baf2824f8f07df5dca27f42, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -2273,7 +2277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 176}
+  m_AnchoredPosition: {x: 0, y: 149}
   m_SizeDelta: {x: 388.28, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &797780861
@@ -3855,7 +3859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 139}
+  m_AnchoredPosition: {x: 0, y: 126}
   m_SizeDelta: {x: 388.28, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1365094824
@@ -4160,6 +4164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3726847836019671611, guid: 45e0f06c750176947862c10346226439, type: 3}
+      propertyPath: nextLevelName
+      value: Level5
+      objectReference: {fileID: 0}
     - target: {fileID: 5516487406859467972, guid: 45e0f06c750176947862c10346226439, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4628,6 +4636,7 @@ MonoBehaviour:
   RaySpawnPoint: {x: 0, y: 0, z: 0}
   uiscript: {fileID: 1222260186}
   anim: {fileID: 1790184934}
+  sms: {fileID: 1790184937}
 --- !u!114 &1790184933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4655,11 +4664,11 @@ MonoBehaviour:
   DialogueAvailableTxt: {fileID: 62305576}
   CanViewDialogue: 0
   AbilityGFX: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
-  Painting: {fileID: 0}
+  Painting: {fileID: 679942782}
   LionPainting: {fileID: 0}
   RhinoPainting: {fileID: 0}
   BuffalPainting: {fileID: 0}
-  LeopardPainting: {fileID: 0}
+  LeopardPainting: {fileID: 2800000, guid: 57c8b759c28da504288d6a9f50d56759, type: 3}
   ElephantPainting: {fileID: 0}
   HasLionAbility: 0
   LionAbilityActive: 0
@@ -4699,6 +4708,25 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 9095158026186171389, guid: 6d06482e6d0a7914cba5b48804c7b92b, type: 3}
   m_PrefabInstance: {fileID: 2050504632}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1790184937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790184931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8bf619299c03742a2595e5be05beb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  jump: 0
+  sprintSuccess: 0
+  walk: 0
+  grab: 0
+  idle: 0
+  climb: 0
 --- !u!1 &1811402525
 GameObject:
   m_ObjectHideFlags: 0
